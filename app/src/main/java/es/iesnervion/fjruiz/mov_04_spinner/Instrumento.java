@@ -1,5 +1,8 @@
 package es.iesnervion.fjruiz.mov_04_spinner;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**************
  * Propiedades
  * ***********
@@ -20,24 +23,42 @@ package es.iesnervion.fjruiz.mov_04_spinner;
  *
  */
 
-public class Instrumentos {
+public class Instrumento implements Parcelable {
     private int id;
     private String nombre;
     private Familia familia;
     private int icon;
 
-    public Instrumentos() {
+    public Instrumento() {
         this.id=0;
         this.nombre="Defecto";
         this.familia=Familia.Cuerda;
     }
 
-    public Instrumentos(int id, String nombre,Familia familia, int icon) {
+    public Instrumento(int id, String nombre, Familia familia, int icon) {
         this.id = id;
         this.nombre = nombre;
         this.familia = familia;
         this.icon = icon;
     }
+
+    protected Instrumento(Parcel in) {
+        id = in.readInt();
+        nombre = in.readString();
+        icon = in.readInt();
+    }
+
+    public static final Creator<Instrumento> CREATOR = new Creator<Instrumento>() {
+        @Override
+        public Instrumento createFromParcel(Parcel in) {
+            return new Instrumento(in);
+        }
+
+        @Override
+        public Instrumento[] newArray(int size) {
+            return new Instrumento[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -69,5 +90,22 @@ public class Instrumentos {
 
     public void setIcon(int icon) {
         this.icon = icon;
+    }
+
+    @Override
+    public String toString(){
+        return nombre;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(nombre);
+        dest.writeInt(icon);
     }
 }
