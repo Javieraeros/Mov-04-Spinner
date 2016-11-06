@@ -15,7 +15,7 @@ public class Foto extends AppCompatActivity {
         setContentView(R.layout.activity_foto);
 
         datos = getIntent().getExtras();
-        seleccionado = (Instrumento) datos.getParcelable("equipo");
+        seleccionado = (Instrumento) datos.getParcelable("instrumento");
 
         ImageView imagen=(ImageView) findViewById(R.id.foto);
         imagen.setImageResource(seleccionado.getIcon());

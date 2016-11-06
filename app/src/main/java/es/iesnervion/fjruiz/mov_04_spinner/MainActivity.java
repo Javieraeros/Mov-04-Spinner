@@ -11,21 +11,43 @@ import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+
     private String[] familias={"Selecciona",
             Familia.Cuerda.toString(),
             Familia.Percusión.toString(),
             Familia.Viento.toString()};
 
-    private Instrumento tambor=new Instrumento(1,"Tambor",Familia.Percusión,R.drawable.defecto);
     private Instrumento selecciona=new Instrumento(0,"Selecciona",Familia.Cuerda,R.drawable.defecto);
-    private Instrumento[] percusion={selecciona,tambor};
 
-    private Instrumento[] viento={selecciona,tambor};
+    private Instrumento tambor=new Instrumento(1,"Tambor",Familia.Percusión,R.drawable.tambor);
+    private Instrumento piano=new Instrumento(2,"Piano",Familia.Percusión,R.drawable.piano);
+    private Instrumento triangulo=new Instrumento(3,"Triangulo",Familia.Percusión,R.drawable.triangulo);
 
-    private Instrumento[] cuerda={selecciona,tambor};
+    private Instrumento violin=new Instrumento(4,"Violín",Familia.Cuerda,R.drawable.violin);
+    private Instrumento viola=new Instrumento(5,"Viola",Familia.Cuerda,R.drawable.viola);
+    private Instrumento violonchelo=new Instrumento(6,"Violonchelo",Familia.Cuerda,R.drawable.violonchelo);
+    private Instrumento contrabajo=new Instrumento(7,"Contrabajo",Familia.Cuerda,R.drawable.contrabajo);
+    private Instrumento guitarra=new Instrumento(8,"Guitarra",Familia.Cuerda,R.drawable.guitarra);
+
+    private Instrumento saxofon=new Instrumento(9,"Saxofón",Familia.Viento,R.drawable.saxofon);
+    private Instrumento clarinete=new Instrumento(10,"Clarinete",Familia.Viento,R.drawable.clarinete);
+    private Instrumento trompeta=new Instrumento(11,"Trompeta",Familia.Viento,R.drawable.trompeta);
+    private Instrumento trombon=new Instrumento(12,"Trombón",Familia.Viento,R.drawable.trombon);
+    private Instrumento oboe=new Instrumento(13,"Oboe",Familia.Viento,R.drawable.oboe);
+
+
+
+    private Instrumento[] percusion={selecciona,tambor,piano,triangulo};
+
+    private Instrumento[] cuerda={selecciona,violin,viola,violonchelo,contrabajo,guitarra};
+
+    private Instrumento[] viento={selecciona,saxofon,clarinete,trompeta,trombon,oboe};
 
     private Instrumento[] vacio={selecciona};
 
+
+
+    private ArrayAdapter<Instrumento> aaInstrumento;
     //Necesario porque lo uso en dos métodos diferentes
     private Spinner familia;
     private Spinner instrumentos;
@@ -56,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        ArrayAdapter<Instrumento> aaInstrumento = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,vacio);
         //No usar view, porque devuelve la fila pulsada, no el spinner!!
         switch (parent.getId()){
             case R.id.familia:
@@ -64,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     //Te selecciona el primero por defecto
                     //Por lo que el primero tiene que ser uno vacío
                     case 0:
+                        aaInstrumento = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,vacio);
                         break;
                     case 1:
                         aaInstrumento=new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,cuerda);
@@ -82,9 +104,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 switch (position){
                     case 0:
                         break;
-                    case 1:
+                    default:
                         Intent info=new Intent(this,Foto.class);
-                        Instrumento instrumentoSeleccionado=(Instrumento) aaInstrumento.getItem(position);
+                        Instrumento instrumentoSeleccionado=aaInstrumento.getItem(position);
                         info.putExtra("instrumento",instrumentoSeleccionado);
                         startActivity(info);
                         break;
