@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    android:background="@drawable/musica"
+    android:background="@drawable/musica2"
     tools:context="es.iesnervion.fjruiz.mov_04_spinner.MainActivity">
 
     <TextView
@@ -28,7 +28,7 @@
     <TextView
         android:id="@+id/instrumentotxt"
         android:text="Instrumentos"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"/>
